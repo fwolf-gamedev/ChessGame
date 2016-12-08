@@ -389,8 +389,12 @@ public partial class ChessGameMgr : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, maxDistance, pieceLayerMask))
         {
-            grabbed = hit.transform;
-            startPos = GetBoardPos(hit.transform.position);
+            int pos = GetBoardPos(hit.transform.position);
+            if (GetSquare(pos).Team == teamTurn)
+            {
+                grabbed = hit.transform;
+                startPos = pos;
+            }
         }
     }
 
